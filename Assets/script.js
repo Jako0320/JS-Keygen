@@ -1,18 +1,17 @@
 // Assignment Code
 
 //Var listing
-symbols = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", " < ", "=", " > ", " ? ", "@", "_", "~"];
-num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+symbols = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "<", "=", ">", "?", "@", "_", "~"];
+num = [2, 3, 4, 5, 6, 7, 8, 9];
 letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 let choice;
 let passLength;
-let password = [];
 let confirmSymbols;
 let confirmNum;
 let confirmUpper;
 let confirmLower;
 
-// Create an array with all cap letters
+// Creates the array with all cap letters
 let up = function (x) {
   return x.toUpperCase();
 };
@@ -22,14 +21,8 @@ lettersPass = letters.map(up);
 const generateBtn = document.querySelector("#generate");
 
 generateBtn.addEventListener("click", function () {
-  genPass = genPassword();
-  document.getElementById("password").placeholder = genPass;
+  genPassword();
 });
-
-// get.addEventListener("click", function () {
-//   pass = genPassword();
-// }
-// )
 
 // GIVEN I need a new, secure password
 // WHEN I click the button to generate a password
@@ -59,54 +52,42 @@ function genPassword() {
   // THEN my input should be validated and at least one character type should be selected
   if (!confirmNum && !confirmSymbols && !confirmUpper && !confirmLower) {
     choice = alert("You must pick at least one criteria");
-    console.log(choice);
   }
 
   // list of all cases of user selections
 
   else if (confirmNum && confirmSymbols && confirmUpper && confirmLower) {
     choice = num.concat(symbols, letters, lettersPass);
-    console.log(choice);
   }
   else if (confirmNum && confirmSymbols && confirmUpper) {
     choice = num.concat(symbols, lettersPass);
-    console.log(choice);
   }
   else if (confirmNum && confirmSymbols && confirmLower) {
     choice = num.concat(symbols, letters);
-    console.log(choice);
   }
   else if (confirmNum && confirmUpper && confirmLower) {
     choice = num.concat(lettersPass, letters);
-    console.log(choice);
   }
   else if (confirmSymbols && confirmUpper && confirmLower) {
     choice = symbols.concat(lettersPass, letters);
-    console.log(choice);
   }
   else if (confirmNum && confirmLower) {
     choice = num.concat(letters);
-    console.log(choice);
   }
   else if (confirmNum && confirmUpper) {
     choice = num.concat(lettersPass);
-    console.log(choice);
   }
   else if (confirmNum && confirmSymbols) {
     choice = num.concat(symbols);
-    console.log(choice);
   }
   else if (confirmUpper && confirmLower) {
     choice = lettersPass.concat(letters);
-    console.log(choice);
   }
   else if (confirmUpper && confirmSymbols) {
     choice = lettersPass.concat(symbols);
-    console.log(choice);
   }
   else if (confirmLower && confirmSymbols) {
     choice = letters.concat(symbols);
-    console.log(choice);
   }
   else if (confirmNum) {
     choice = num;
@@ -122,20 +103,23 @@ function genPassword() {
   }
   // WHEN all prompts are answered
   // THEN a password is generated that matches the selected criteria
-    for (let i = 0; i < passLength; i++) {
-      let selection = choice[Math.floor(Math.random() * choice.length)];
-      password.push(selection);
-    }
+  let password = [];
+  for (let i = 0; i < passLength; i++) {
+    let selection = choice[Math.floor(Math.random() * choice.length)];
+    password.push(selection);
+  }
 
-    // mutate the array into a string
-    let ps = password.join("")
-    passDisplay(ps);  
+  // mutate the array into a string
+  let ps = password.join("")
+  passDisplay(ps);
+  return ps;
 }
 
 // WHEN the password is generated
 // THEN the password is either displayed in an alert or written to the page
 function passDisplay(ps) {
   document.getElementById("password").textContent = ps;
+  alert(ps);
 }
 
 
